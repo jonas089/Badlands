@@ -1,0 +1,1 @@
+var snarkjs = require('snarkjs');
