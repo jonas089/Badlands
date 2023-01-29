@@ -9,7 +9,7 @@ Brute-force difficulty for a Birthday (d, m, y):
   - possible combinations: 365*50 = 18250 \
   => therefore it's unlikely to guess a Birthday that's not 01.01.1960 or 31.12.2010 on 1st attempt. \
 Example: Jonas Birthday is 16.08.2000 \
-=> odds of guessing correct d, m, y blind, on first attempt, are 1:18250
+=> odds of guessing correct d, m, y blind, on first attempt, are 1:18250 ( which is not quite true as swapping d and m would still produce a valid proof )
 # snarkjs_lib
 Javascript example for witness computation and proof validation. \
 Circuit needs to be compiled using circom-rs first.
