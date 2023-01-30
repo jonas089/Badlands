@@ -1,15 +1,16 @@
 pragma circom 2.0.0;
-template Multiplier2 () {
+template Birthday () {
 
    // Declaration of signals.
    signal input d;
    signal input m;
    signal input y;
    // c will be written to public.json
-   signal output c;
-
+   signal output a;
+   signal output b;
    // Constraints.
-   c <== d * m * y;
-   // If pc == vc && proof.is_valid:
-   // accept
+   // two outputs so d and m are not interchangeable
+   a <== d * y;
+   b <== m * y;
 }
+component main = Birthday();
