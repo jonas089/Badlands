@@ -8,9 +8,11 @@ template Birthday () {
    // c will be written to public.json
    signal output a;
    signal output b;
+   signal output c;
    // Constraints.
    // two outputs so d and m are not interchangeable
    a <== d * y;
    b <== m * y;
+   c <== d * m;
 }
 component main = Birthday();
