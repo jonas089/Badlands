@@ -1,7 +1,7 @@
 # Working with [Circom](https://docs.circom.io/getting-started/writing-circuits/)
 Example circuits written in Circom specification language.
 # Birthday
-Prove that you know a Birthday e.g. d, m, y such that d * y == a and m * y == b \
+Prove that you know a Birthday e.g. d, m, y such that d * y == a and m * y == b and d * m == c\
 a and b are public so the verifier can compare (public.json). \
 
 Brute-force difficulty for a Birthday (d, m, y): \
