@@ -4,16 +4,14 @@ import time, json
 big_prime = 174440041
 def main():
     secret = {"d":"22", "m":"05", "y":"2002"}
-    def binary(string):
-        return ''.join(format(ord(i), '08b') for i in string)
-
     inputs = {}
     for s in secret:
         _hash = SHA384.new()
         _hash.update(secret[s].encode('utf-8'))
-        _hash = _hash.hexdigest()
-
-        b = int(binary(_hash)) % big_prime
+        _hash = _hash.digest()
+        # as binary
+        _hash = ''.join(format(byte, '08b') for byte in _hash)
+        b = int(_hash) % big_prime
         inputs[s] = b
     print('d: {d}'.format(d=inputs['d']))
     print('m: {m}'.format(m=inputs['m']))
@@ -51,5 +49,5 @@ def tests():
     if not str(int(i['d']) * int(i['m'])) == p[2]:
         print('Error #3')
     print('OK.')
-#main()
-tests()
+main()
+#tests()
