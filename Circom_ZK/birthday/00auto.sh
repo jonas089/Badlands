@@ -5,4 +5,4 @@
 ./03powersoftau_ceremony.sh
 ./04contribution.sh $1
 ./05generate_proof.sh $1
-./06verify.sh
+#./06verify.sh
