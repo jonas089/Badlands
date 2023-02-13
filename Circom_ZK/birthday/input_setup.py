@@ -35,11 +35,6 @@ def tests():
         p = json.loads(public.read())
     with open('./inputs/input.json', 'r') as inputs:
         i = json.loads(inputs.read())
-    '''
-   a <== d * y;
-   b <== m * y;
-   c <== d * m;
-    '''
     if not str(int(i['d']) * int(i['y'])) == p[0]:
         print(str(int(i['d']) * int(i['y'])))
         print(p[0])

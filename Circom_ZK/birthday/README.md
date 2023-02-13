@@ -1,6 +1,4 @@
-# Zero Knowledge Circuits
-
-## 1. Example: 'Bday' Circuit
+# 'Bday' Circuit
 ./00auto.sh bday => compile circuit, contribute to new powersoftau ceremony, compute witness, generate proof and validate proof. \
 Example output:
 ```
