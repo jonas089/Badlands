@@ -1,8 +1,8 @@
 pragma circom 2.0.0;
 include "./ed25519-circom/circuits/verify.circom";
 template TxVerifier (){
-  component MyCircuit = Ed25519Verifier(256);
-  signal input msg[256];
+  component MyCircuit = Ed25519Verifier(16);
+  signal input msg[16];
   signal input A[256];
   signal input R8[256];
   signal input S[255];
