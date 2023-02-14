@@ -1,6 +1,7 @@
 import ed25519
 import curve25519
 import json
+from bitstring import BitArray
 '''javascript
 bigintModArith = require('bigint-mod-arith');
 function buffer2bits(buff) {
@@ -67,13 +68,14 @@ print('PointA: ', PointA)
 print('PointR: ', PointR)
 
 i_json = {
-    "msg":msg,
-    "R8":R8,
-    "S":S,
-    "A":A,
-    "PointA":PointA,
-    "PointR":PointR
+    "msg":list(msg),
+    "R8":list(R8),
+    "S":list(S),
+    "A":list(A),
+    "PointA":list(PointA),
+    "PointR":list(PointR)
 }
+print('Length: ', len(i_json['A']))
 
 s = str(i_json)
 _s = ''
@@ -85,8 +87,6 @@ for l in s:
 print(_s)
 with open('./inputs/input.json', 'w') as input_file:
     input_file.write(_s)
-
-
 '''python
    The rest of this section describes how Ed25519 can be implemented in
    Python (version 3.2 or later) for illustration.  See Appendix A for
