@@ -1,15 +1,19 @@
 pragma circom 2.0.0;
 
 template Ed25519Verifier {
-  signal input msg[1];
+  signal input msg[n];
 
-  signal input A[1];
-  signal input R8[1];
-  signal input S[1];
+  signal input A[256];
+  signal input R8[256];
+  signal input S[255];
+
+  signal input PointA[4][3];
+  signal input PointR[4][3];
 
   signal output valid;
 }
 component main = Ed25519Verifier();
+
 
 /*
 in verify.circom:

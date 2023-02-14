@@ -1,6 +1,6 @@
 import ed25519
 import curve25519
-
+import json
 '''javascript
 bigintModArith = require('bigint-mod-arith');
 function buffer2bits(buff) {
@@ -51,29 +51,40 @@ signature = sk.sign(msg)
 # Extract R8 and S from the signature bytes
 R8 = signature[:32]
 S = signature[32:]
-print(R8)
-print(S)
 # Convert the public key to binary
 A = public_key.to_bytes()
-print(A)
 # Convert R8 to a point on the elliptic curve
 PointR = point_compress(R8)
-print(PointR)
 # Convert the public key to a point on the elliptic curve
 PointA = point_compress(A)
-print(PointA)
 
 
-print(msg)
-print(R8)
-print(S)
-print(A)
-print(PointA)
-print(PointR)
+print('msg: ', msg)
+print('R8: ', R8)
+print('S: ', S)
+print('A: ', A)
+print('PointA: ', PointA)
+print('PointR: ', PointR)
 
+i_json = {
+    "msg":msg,
+    "R8":R8,
+    "S":S,
+    "A":A,
+    "PointA":PointA,
+    "PointR":PointR
+}
 
-
-
+s = str(i_json)
+_s = ''
+for l in s:
+    if l != "'":
+        _s += l
+    else:
+        _s += '"'
+print(_s)
+with open('./inputs/input.json', 'w') as input_file:
+    input_file.write(_s)
 
 
 '''python
