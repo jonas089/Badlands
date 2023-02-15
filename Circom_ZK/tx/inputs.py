@@ -7,7 +7,7 @@ import base64
 from bitarray import bitarray
 ## First, some preliminaries that will be needed.
 
-import hashlib
+import hashlib, time
 
 def sha512(s):
     return hashlib.sha512(s).digest()
@@ -188,7 +188,6 @@ A = public_key.to_bytes()
 
 res = verify(A, msg, signature)
 
-print(res)
 PointA = point_decompress(A)
 PointR = point_decompress(R8)
 def tuple_to_array_4x3(t):
@@ -207,27 +206,33 @@ def binary(public_key_bytes):
 	return public_key_binary
 
 def generate_inputs():
-	print(PointA)
-	print("Length: ", len(binary(msg)))
-	i_json = {
-	    "msg":list(binary(msg)),
-	    "R8":list(binary(R8)),
-	    "S":list(binary(S)[:-1]),
-	    "A":list(binary(A)),
-	    "PointA":tuple_to_array_4x3(PointA),
-	    "PointR":tuple_to_array_4x3(PointR)
-	}
-	s = str(i_json)
-	_s = ''
-	for l in s:
-	    if l != "'":
-	        _s += l
-	    else:
-	        _s += '"'
-	print(_s)
-	with open('./inputs/input.json', 'w') as input_file:
-	    input_file.write(_s)
-	pass
+    print(PointA)
+    print("Length: ", len(binary(msg)))
+    i_json = {
+        "msg":list(binary(msg)),
+        "R8":list(binary(R8)),
+        "S":list(binary(S)[:-1]),
+        "A":list(binary(A)),
+        "PointA":tuple_to_array_4x3(PointA),
+        "PointR":tuple_to_array_4x3(PointR)
+    }
+    sti = ['msg', 'R8', 'S', 'A']
+    for key in sti:
+        _new = []
+        for i in i_json[key]:
+            _new.append(int(i))
+        i_json[key] = _new
 
+    s = str(i_json)
+    _s = ''
+    for l in s:
+        if l != "'":
+            _s += l
+        else:
+            _s += '"'
+    print(_s)
+    with open('./inputs/input.json', 'w') as input_file:
+        input_file.write(_s)
+    pass
 
 generate_inputs()
