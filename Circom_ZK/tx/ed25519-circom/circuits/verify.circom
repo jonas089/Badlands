@@ -43,8 +43,8 @@ template Ed25519Verifier(n) {
   }
 
   for (i=0; i<256; i++) {
-    compressA.out[i] === A[i];
     compressR.out[i] === R8[i];
+    //compressA.out[i] === A[i];
   }
 
   component hash = Sha512(n+256+256);

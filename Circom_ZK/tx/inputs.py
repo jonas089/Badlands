@@ -11,6 +11,19 @@ import hashlib, time
 
 
 import numpy as np
+def to_base_2_85(x):
+    base = 2 ** 85
+    result = []
+    for i in x:
+        digits = []
+        while i > 0:
+            i, remainder = divmod(i, base)
+            digits.append(remainder)
+        result.append(digits)
+    for i in result:
+        while len(i) < 3:
+            i.append(0)
+    return result
 ''' Improvised, unlikely to be any help.
 def encode_4tuple(t):
     # Convert each element of the tuple to a binary string of length 28
@@ -220,11 +233,11 @@ signature = sk.sign(msg)
 R8 = signature[:32]
 S = signature[32:]
 # Convert the public key to binary
-Abin = binary(public_key.to_bytes())
 A = public_key.to_bytes()
 
 #res = verify(A, msg, signature)
 
+# Public keys are points on elliptic curve in Ed25519
 PointA = point_decompress(A)
 PointR = point_decompress(R8)
 
@@ -240,18 +253,17 @@ print("PointR Length: ", len(PointR))
 
 def generate_inputs():
     i_json = {
-        "msg":list(binary(msg)),
-        "R8":list(binary(R8)),
-        "S":list(binary(S)[:-1]),
-        "A":list(Abin),
-        "PointA":encode_4tuple(PointA),
-        "PointR":encode_4tuple(PointR)
+        "msg":binary(msg),
+        "R8":R8,
+        "S":binary(S)[:-1],
+        "A":list(binary(A)),
+        "PointA":to_base_2_85(PointA),
+        "PointR":to_base_2_85(PointR)
     }
 
     print("Len of A in Binary: ", len(i_json['A']))
-    print(len(i_json["PointA"]))
-    print(len(i_json["PointR"]))
 
+    print('Size overview: msg:{msgsize}, R8:{R8size}, S:{Ssize}, A:{Asize}'.format(msgsize=len(i_json['msg']), R8size=len(i_json['R8']), Ssize=len(i_json['S']), Asize=len(i_json['A'])))
     sti = ['msg', 'R8', 'S', 'A']
     for key in sti:
         _new = []
