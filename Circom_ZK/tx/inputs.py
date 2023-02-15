@@ -9,6 +9,42 @@ from bitarray import bitarray
 
 import hashlib, time
 
+
+import numpy as np
+''' Improvised, unlikely to be any help.
+def encode_4tuple(t):
+    # Convert each element of the tuple to a binary string of length 28
+    b = [format(x, '028b') for x in t]
+
+    # Concatenate the binary strings to form a single binary string of length 112
+    b_concat = ''.join(b)
+
+    # Convert the binary string to a decimal number
+    n = int(b_concat, 2)
+
+    # Convert the decimal number to a base-3 representation
+    t_base3 = np.base_repr(n, base=3)
+
+    # Pad the base-3 representation with leading zeros to form an array of size [4][3]
+    t_array = np.zeros((4, 3), dtype=int)
+    t_base3_padded = t_base3.zfill(42)
+    for i in range(4):
+        for j in range(3):
+            t_array[i, j] = int(t_base3_padded[3*(i*3+j):(i*3+j+1)*3], 3)
+    return t_array
+
+def tuple_to_array_4x3(t):
+    # Convert each element in the tuple to base85
+    encoded = [base64.b85encode(i.to_bytes(32, byteorder="little")).decode() for i in t]
+    # Create a 2D array of size 4x3 to hold the encoded values
+    result = [[0 for j in range(3)] for i in range(4)]
+    # Split each base85 string into chunks of 3 characters and fill the array row by row
+    for i in range(4):
+        for j in range(3):
+            chunk = encoded[i][j*3:(j+1)*3]
+            result[i][j] = ord(chunk[0]) + (ord(chunk[1]) << 8) + (ord(chunk[2]) << 16)
+    return result
+'''
 def sha512(s):
     return hashlib.sha512(s).digest()
 
@@ -162,11 +198,11 @@ def verify(public, msg, signature):
 	h = sha512_modq(Rs + public + msg)
 	sB = point_mul(s, G)
 	hA = point_mul(h, A)
-	print("R: ", R)
-	print("A: ", A)
-	print("msg: ", msg)
 	return point_equal(sB, point_add(R, hA))
 
+def binary(bytes):
+	binary = ''.join(format(b, '08b') for b in bytes)
+	return binary
 
 # Define the message to be signed
 msg = b"Hi"
@@ -184,38 +220,38 @@ signature = sk.sign(msg)
 R8 = signature[:32]
 S = signature[32:]
 # Convert the public key to binary
+Abin = binary(public_key.to_bytes())
 A = public_key.to_bytes()
 
-res = verify(A, msg, signature)
+#res = verify(A, msg, signature)
 
 PointA = point_decompress(A)
 PointR = point_decompress(R8)
-def tuple_to_array_4x3(t):
-    # Convert each element in the tuple to base85
-    encoded = [base64.b85encode(i.to_bytes(32, byteorder="little")).decode() for i in t]
-    # Create a 2D array of size 4x3 to hold the encoded values
-    result = [[0 for j in range(3)] for i in range(4)]
-    # Split each base85 string into chunks of 3 characters and fill the array row by row
-    for i in range(4):
-        for j in range(3):
-            chunk = encoded[i][j*3:(j+1)*3]
-            result[i][j] = ord(chunk[0]) + (ord(chunk[1]) << 8) + (ord(chunk[2]) << 16)
-    return result
-def binary(public_key_bytes):
-	public_key_binary = ''.join(format(b, '08b') for b in public_key_bytes)
-	return public_key_binary
+
+# test assertion as per Cicuit.
+assert(point_compress(PointR) == R8)
+assert(point_compress(PointA) == A)
+
+print("Public Key in Bytes: ", A)
+print("Public Key in Bits: ", binary(public_key.to_bytes()))
+
+print("PointA Length: ", len(PointA))
+print("PointR Length: ", len(PointR))
 
 def generate_inputs():
-    print(PointA)
-    print("Length: ", len(binary(msg)))
     i_json = {
         "msg":list(binary(msg)),
         "R8":list(binary(R8)),
         "S":list(binary(S)[:-1]),
-        "A":list(binary(A)),
-        "PointA":tuple_to_array_4x3(PointA),
-        "PointR":tuple_to_array_4x3(PointR)
+        "A":list(Abin),
+        "PointA":encode_4tuple(PointA),
+        "PointR":encode_4tuple(PointR)
     }
+
+    print("Len of A in Binary: ", len(i_json['A']))
+    print(len(i_json["PointA"]))
+    print(len(i_json["PointR"]))
+
     sti = ['msg', 'R8', 'S', 'A']
     for key in sti:
         _new = []
@@ -230,7 +266,6 @@ def generate_inputs():
             _s += l
         else:
             _s += '"'
-    print(_s)
     with open('./inputs/input.json', 'w') as input_file:
         input_file.write(_s)
     pass
