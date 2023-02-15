@@ -254,7 +254,7 @@ print("PointR Length: ", len(PointR))
 def generate_inputs():
     i_json = {
         "msg":binary(msg),
-        "R8":R8,
+        "R8":binary(R8),
         "S":binary(S)[:-1],
         "A":list(binary(A)),
         "PointA":to_base_2_85(PointA),
