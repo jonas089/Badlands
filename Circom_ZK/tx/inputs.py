@@ -5,6 +5,7 @@ from bitstring import BitArray
 import binascii
 import base64
 from bitarray import bitarray
+from termcolor import colored
 ## First, some preliminaries that will be needed.
 
 import hashlib, time
@@ -214,8 +215,8 @@ def verify(public, msg, signature):
 	return point_equal(sB, point_add(R, hA))
 
 def binary(bytes):
-	binary = ''.join(format(b, '08b') for b in bytes)
-	return binary
+    binary = ''.join(format(b, '08b') for b in bytes)
+    return binary
 
 # Define the message to be signed
 msg = b"Hi"
@@ -244,9 +245,7 @@ PointR = point_decompress(R8)
 # test assertion as per Cicuit.
 assert(point_compress(PointR) == R8)
 assert(point_compress(PointA) == A)
-
-print("Public Key in Bytes: ", A)
-print("Public Key in Bits: ", binary(public_key.to_bytes()))
+print(colored("Assertion passed in Python.", "green"))
 
 print("PointA Length: ", len(PointA))
 print("PointR Length: ", len(PointR))
@@ -256,7 +255,7 @@ def generate_inputs():
         "msg":binary(msg),
         "R8":binary(R8),
         "S":binary(S)[:-1],
-        "A":list(binary(A)),
+        "A":binary(A),
         "PointA":to_base_2_85(PointA),
         "PointR":to_base_2_85(PointR)
     }
@@ -265,11 +264,11 @@ def generate_inputs():
 
     print('Size overview: msg:{msgsize}, R8:{R8size}, S:{Ssize}, A:{Asize}'.format(msgsize=len(i_json['msg']), R8size=len(i_json['R8']), Ssize=len(i_json['S']), Asize=len(i_json['A'])))
     sti = ['msg', 'R8', 'S', 'A']
-    for key in sti:
-        _new = []
-        for i in i_json[key]:
-            _new.append(int(i))
-        i_json[key] = _new
+    for _sti in sti:
+        r = []
+        for l in i_json[_sti]:
+          r.append(int(l))
+        i_json[_sti] = r
 
     s = str(i_json)
     _s = ''
