@@ -1,7 +1,0 @@
-Person has Private_Key priv and Public_key pub
-
-
-Signature S:
-s = S(priv, message)
-Verify:
-v = V(pub, s) => True | False
