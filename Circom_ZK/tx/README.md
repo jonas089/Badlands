@@ -5,7 +5,7 @@
 See [output.txt](https://github.com/jonas089/cryptographic-research/blob/master/Circom_ZK/tx/playground/ed25519-circom/Output.txt) \
 From [ed25519-circom](https://github.com/jonas089/cryptographic-research/blob/master/Circom_ZK/tx/playground/ed25519-circom/test/ed25519verfication.test.js) \
 In [inputs.json](https://github.com/jonas089/cryptographic-research/blob/master/Circom_ZK/tx/inputs/input.json) \
-Conclusion: Circom-ed25519 does not work out of the box. \
+
 **Error**: in run.sh / 02*.sh: 
 ```bash
 jonass-air:tx chef$ ./run.sh
@@ -38,6 +38,12 @@ Error in template TxVerifier_209 line: 17
     at WitnessCalculator.calculateWTNSBin (/Users/chef/Desktop/cryptographic-research/Circom_ZK/tx/output/constraints/signedtx_js/witness_calculator.js:212:20)
     at /Users/chef/Desktop/cryptographic-research/Circom_ZK/tx/output/constraints/signedtx_js/generate_witness.js:15:38
 ```
+
+
+
+Conclusion: Circom-ed25519 does not work out of the box. \
+=> Wasm Test builder [link](https://github.com/iden3/circom_tester)
+
 **Wasm Test Builder Setup as per the Docs**
 Run tests with powersOfTau28_hez_final_22.ptau \
 Running [this](https://github.com/Electron-Labs/ed25519-circom/blob/main/test/ed25519verfication.test.js) test: \
