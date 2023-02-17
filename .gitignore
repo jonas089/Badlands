@@ -1,3 +1,5 @@
 node_modules/
 zk-miscellaneous/
 Circom_ZK/tx/output/
+*/.DS_Store
+.DS_Store
