@@ -38,7 +38,9 @@ Error in template TxVerifier_209 line: 17
     at WitnessCalculator.calculateWTNSBin (/Users/chef/Desktop/cryptographic-research/Circom_ZK/tx/output/constraints/signedtx_js/witness_calculator.js:212:20)
     at /Users/chef/Desktop/cryptographic-research/Circom_ZK/tx/output/constraints/signedtx_js/generate_witness.js:15:38
 ```
-
+**Diagnosis**: \
+? Wasm builder takes arguments in different format than circom expects in inputs.json \
+? Is ed25519-circom broken \
 
 
 Conclusion: Circom-ed25519 does not work out of the box. \
@@ -50,7 +52,34 @@ Running [this](https://github.com/Electron-Labs/ed25519-circom/blob/main/test/ed
 **Error**:
 
 ```
+jonass-air:ed25519-circom chef$ ./test-verify.sh
 
+
+  ED25519 verifcation test
+    When testing against the RFC test vector
+      1) should verify correctly
+    When testing against the RFC test vector
+      2) should verify correctly
+
+
+  0 passing (4m)
+  2 failing
+
+  1) ED25519 verifcation test
+       When testing against the RFC test vector
+         should verify correctly:
+     LinkError: WebAssembly.instantiate(): Import #1 module="runtime" function="printErrorMessage" error: function import requires a callable
+      at builder (node_modules/circom_tester/wasm/witness_calculator.js:19:40)
+      at async wasm_tester (node_modules/circom_tester/wasm/tester.js:60:16)
+      at async Context.<anonymous> (test/ed25519verfication.test.js:11:19)
+
+  2) ED25519 verifcation test
+       When testing against the RFC test vector
+         should verify correctly:
+     LinkError: WebAssembly.instantiate(): Import #1 module="runtime" function="printErrorMessage" error: function import requires a callable
+      at builder (node_modules/circom_tester/wasm/witness_calculator.js:19:40)
+      at async wasm_tester (node_modules/circom_tester/wasm/tester.js:60:16)
+      at async Context.<anonymous> (test/ed25519verfication.test.js:66:19)
 
 
 ```
