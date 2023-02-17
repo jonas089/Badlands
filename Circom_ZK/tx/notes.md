@@ -1,4 +1,4 @@
-’’’javascript
+```javascript
 
 const path = require('path');
 const assert = require('assert');
@@ -254,4 +254,4 @@ describe('Batch Verification test', () => {
     });
   });
 });
-’’’
+```
