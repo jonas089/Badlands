@@ -20,4 +20,5 @@ Example output:
 Input date can be found in ./inputs/input.json
 
 # TBD
-Use SHA.circom, Modulus.circom or equiv. To include the computations done in inputs.py in the circuit to provide moderate security.
+Use SHA.circom, Modulus.circom or equiv. To include the computations done in inputs.py in the circuit to provide moderate security. \
+See: [SHA256.circom](https://github.com/iden3/circomlib/blob/master/circuits/sha256/sha256.circom)
