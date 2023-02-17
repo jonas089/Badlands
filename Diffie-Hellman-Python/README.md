@@ -1,4 +1,4 @@
-# My implementation of Diffie-Hellman Symmetric Cryptography
+# Learning Key Exchange Cryptography from Wikipedia -> Diffie Hellman
 
 Python implementation of Diffie-Hellman according to Wikipedia. \
 For educational purposes only. \
