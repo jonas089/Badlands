@@ -29,7 +29,8 @@
   "author": "rahulghangas, garvitgoel, BakerStreetPhantom, suniljalandhra",
   "license": "UNLICENSED",
   "dependencies": {
-    "@electron-labs/sha512": "^1.0.4"
+    "@electron-labs/sha512": "^1.0.4",
+    "snarkjs": "^0.6.1"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.1.1",
