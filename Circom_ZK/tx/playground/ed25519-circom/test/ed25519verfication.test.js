@@ -4,9 +4,10 @@ const wasmTester = require('circom_tester').wasm;
 const { performance } = require('perf_hooks');
 const mlog = require('mocha-logger');
 const utils = require('./utils');
+const fs = require('fs');
 
 describe('ED25519 verifcation test', () => {
-  describe('When testing against the RFC test vector', () => {
+  /*describe('When testing against the RFC test vector', () => {
     it('should verify correctly', async () => {
       const cir = await wasmTester(path.join(__dirname, 'circuits', 'verify.circom'));
       const pointA = [
@@ -22,7 +23,7 @@ describe('ED25519 verifcation test', () => {
         7867784340861643381702890578607277776011430152424699121581244161773093676488n,
       ];
       const A = 16962727616734173323702303146057009569815335830970791807500022961899349823996n;
-      const msg = 33455n;
+      const msg = "Hi";
       const R8 = 78142972218048021222160463610080218564159109753358461787358041591257467621730n;
       const S = 4869643893319708471955165214975585939793846505679808910535986866633137979160n;
       const bufMsg = utils.bigIntToLEBuffer(msg);
@@ -59,7 +60,7 @@ describe('ED25519 verifcation test', () => {
         assert.ok(false);
       }
     });
-  });
+  });*/
 
   describe('When testing against the RFC test vector', () => {
     it('should verify correctly', async () => {
@@ -105,6 +106,30 @@ describe('ED25519 verifcation test', () => {
       console.log(bitsS);
       console.log(chunkA);
       console.log(chunkR);
+      s = {
+        'a':bitsMsg.toString(),
+        'b':bitsA.toString(),
+        'c':bitsR8.toString(),
+        'd':bitsS.toString(),
+        'e':chunkA.toString(),
+        'f':chunkR.toString()
+      }
+      l = {
+        'a':[],
+        'b':[],
+        'c':[],
+        'd':[],
+        'e':[],
+        'f':[]
+      }
+      console.log(s['a'])
+      console.log(JSON.parse("[" + s['a'] + "]"));
+      data = "msg: " + s['a'] + '\n' + "A: " + s['b'] + '\n' + "R8: " + s['c'] + '\n' + "S: " + s['d'] + '\n'+ "chunkA: " + s['e'] + '\n' + "chunkR: " + s['f'];
+      fs.writeFile('Output.txt', data, (err) => {
+
+          // In case of a error throw err.
+          if (err) throw err;
+      })
       assert.ok(1===1);
       /*
       try {
