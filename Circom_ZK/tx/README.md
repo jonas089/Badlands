@@ -40,7 +40,7 @@ Error in template TxVerifier_209 line: 17
 ```
 **Wasm Test Builder Setup as per the Docs**
 Run tests with powersOfTau28_hez_final_22.ptau \
-Running [this](https://github.com/Electron-Labs/ed25519-circom/blob/main/test/ed25519verfication.test.js) test:
+Running [this](https://github.com/Electron-Labs/ed25519-circom/blob/main/test/ed25519verfication.test.js) test: \
 **Error**:
 
 ```
