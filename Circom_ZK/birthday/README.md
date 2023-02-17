@@ -1,4 +1,4 @@
-# 'Bday' Circuit
+# 'Bday' Circuit - Unfinished
 ./00auto.sh bday => compile circuit, contribute to new powersoftau ceremony, compute witness, generate proof and validate proof. \
 Example output:
 ```
@@ -18,3 +18,6 @@ Example output:
 
 ```
 Input date can be found in ./inputs/input.json
+
+# TBD
+Use SHA.circom, Modulus.circom or equiv. To include the computations done in inputs.py in the circuit to provide moderate security.
