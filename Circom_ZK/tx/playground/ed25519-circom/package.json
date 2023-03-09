@@ -30,7 +30,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@electron-labs/sha512": "^1.0.4",
-    "snarkjs": "^0.6.1",
+    "snarkjs": "^0.6.7",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {

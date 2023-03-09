@@ -10,7 +10,6 @@ from termcolor import colored
 
 import hashlib, time
 
-
 import numpy as np
 def to_base_2_85(x):
     base = 2 ** 85
@@ -251,6 +250,7 @@ print("PointA Length: ", len(PointA))
 print("PointR Length: ", len(PointR))
 
 def generate_inputs():
+    '''
     i_json = {
         "msg":binary(msg),
         "R8":binary(R8),
@@ -280,5 +280,12 @@ def generate_inputs():
     with open('./inputs/input.json', 'w') as input_file:
         input_file.write(_s)
     pass
+
+    '''
+
+
+    A = 16962727616734173323702303146057009569815335830970791807500022961899349823996;
+    Abuffer = A.to_bytes((A.bit_length() + 7) // 8, byteorder='little')
+    print("Padded Buffer A: ", point_decompress(Abuffer))
 
 generate_inputs()

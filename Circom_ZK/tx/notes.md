@@ -8,6 +8,62 @@ const wasmTester = require('circom_tester').wasm;
 const crypto = require('crypto');
 const utils = require('./utils');
 
+
+/*
+
+Example of padded buffer and chunk for point on elliptic curve ( from script outputs ):
+
+
+Padded Buffer A:  (43933056957747458452560886832567536073542840507013052263144963060608791330050, 16962727616734173323702303146057009569815335830970791807500022961899349823996, 1, 47597536765056690778342994103149503974598380825968728087754575050160026478564)
+Jonass-MacBook-Air:tx chef$ ls
+00auto.sh			ed25519-circom
+01compile.sh			inputs
+02compute_witness.sh		inputs.py
+03powersoftau_ceremony.sh	notes.md
+04contribution.sh		playground
+05generate_proof.sh		run.sh
+06verify.sh			signedtx.circom
+README.md
+Jonass-MacBook-Air:tx chef$ cd playground
+Jonass-MacBook-Air:playground chef$ ls
+circom_tester	ed25519-circom
+Jonass-MacBook-Air:playground chef$ cd ed2*
+Jonass-MacBook-Air:ed25519-circom chef$ ls
+Dockerfile		artifacts		package-lock.json
+Jenkinsfile		circuits		package.json
+Makefile		contracts		test
+Output.txt		hardhat.config.js	test-verify.sh
+README.md		node_modules		timeout-server.png
+Jonass-MacBook-Air:ed25519-circom chef$ ./test-verify.sh
+
+
+  ED25519 verifcation test
+    When testing against the RFC test vector
+Cunk A:  [
+  [
+    4730506516830149311053058n,
+    16492541847767404437354919n,
+    29355681060784451154336116n
+  ],
+  [
+    37044855473276001117360636n,
+    36044041573171652573795971n,
+    11334344940228348385886412n
+  ],
+  [ 1n ],
+  [
+    36006434350668361313085412n,
+    3961809584842615293282987n,
+    31804254138239842479622482n
+  ]
+]
+
+
+
+
+*/
+
+
 // describe('Batch Verification', () => {
 //   describe('when testing against three test vectors with 16 bits of message', () => {
 //     it('should verify correctly', async () => {

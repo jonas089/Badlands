@@ -41,6 +41,8 @@ describe('ED25519 verifcation test', () => {
         chunkR.push(utils.chunkBigInt(pointR[i], BigInt(2 ** 85)));
       }
 
+      console.log("Cunk A: ", chunkA);
+
       for (let i = 0; i < 4; i++) {
         utils.pad(chunkA[i], 3);
         utils.pad(chunkR[i], 3);
